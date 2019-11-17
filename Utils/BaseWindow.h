@@ -47,34 +47,27 @@ public:
 	*/
 	virtual bool Create(const wchar_t* windowName)
 	{
-		RegisterWindowClass();
+		if (!RegisterWindowClass() || created)
+			return false;
 
-		if (!created)
-		{
-			window = CreateWindowEx(
-				0,
-				this->ClassName(),
-				windowName,
-				WS_OVERLAPPEDWINDOW,
-				CW_USEDEFAULT,
-				CW_USEDEFAULT,
-				CW_USEDEFAULT,
-				CW_USEDEFAULT,
-				NULL,
-				NULL,
-				GetModuleHandle(NULL),
-				this
-			);
+		window = CreateWindowEx(
+			0,
+			this->ClassName(),
+			windowName,
+			WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			NULL,
+			NULL,
+			GetModuleHandle(NULL),
+			this
+		);
 
-			created = (window != nullptr);
+		created = true;
 
-			return window != nullptr;
-		}
-		else
-		{
-			MessageBox(NULL, L"Warning: Attempted to call Create() on window twice", L"Window creation", MB_OK);
-			return true;
-		}
+		return window != nullptr;
 	}
 
 	HWND Window() const
@@ -88,24 +81,20 @@ protected:
 	/*
 		Register the window class and return true if no error (or if already registered)
 	*/
-	bool RegisterWindowClass()
+	bool RegisterWindowClass(WNDCLASS wnd = {})
 	{
-		if (!registered)
-		{
-			registered = true;
+		if (registered)
+			return true;
+		
+		registered = true;
 
-			WNDCLASS wnd = {};
+		wnd.lpfnWndProc = WindowProcedure;
+		wnd.hInstance = GetModuleHandle(NULL);
+		wnd.lpszClassName = this->ClassName();
 
-			wnd.lpfnWndProc = WindowProcedure;
-			wnd.hInstance = GetModuleHandle(NULL);
-			wnd.lpszClassName = this->ClassName();
-
-			RegisterClass(&wnd);
-			
-			return output_previous_windows_error();
-		}
-
-		return true;
+		RegisterClass(&wnd);
+		
+		return !output_previous_windows_error();
 	}
 
 	bool created = false;
