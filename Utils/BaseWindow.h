@@ -19,7 +19,7 @@ public:
 		{
 			CREATESTRUCT* pcreate = (CREATESTRUCT*)lparam;
 			pState = reinterpret_cast<DERIVED_TYPE*>(pcreate->lpCreateParams);
-			SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG)pState);
+			SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pState);
 		}
 		else
 		{
