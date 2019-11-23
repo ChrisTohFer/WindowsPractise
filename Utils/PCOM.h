@@ -2,6 +2,9 @@
 
 #include <Windows.h>
 
+/*
+	Class wraps a pointer to a COM object and automatically updates reference count to prevent memory leaks
+*/
 template<typename COM_TYPE>
 class PCOM
 {
