@@ -2,6 +2,7 @@
 
 LRESULT DefaultWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
+	//Determine type of message
 	switch (msg)
 	{
 	case WM_DESTROY:
@@ -17,9 +18,9 @@ LRESULT DefaultWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPARAM 
 
 		EndPaint(hwnd, &ps);
 	}
-	return 0;
 	}
 
+	//Carry out default action if no specific action is required
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
