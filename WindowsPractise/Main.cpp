@@ -11,18 +11,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 	ShowWindow(example.Window(), nCmdShow);
 
 	//Initialise COM library
-	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-	hr;
-
-	//Experimenting with HRESULT error handling
-	if (SUCCEEDED(hr))
-	{
-		MessageBox(NULL, L"Initializing the COM library succeeded!", L"Result", MB_OK);
-	}
-	else
-	{
-		MessageBox(NULL, L"Initializing the COM library FAILED!", L"Result", MB_OK);
-	}
+	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE); hr;
 
 	//Windows message loop (with error output)
 	output_previous_windows_error(L"Pre-Message Loop:");
@@ -32,7 +21,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 
-		output_previous_windows_error(L"Message Loop");
+		output_previous_windows_error(L"Message Loop", false, false);
 	}
 
 	//
