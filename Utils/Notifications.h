@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Windows.h>
+#include <string>
 
 /*
 	Creates a messagebox and returns true if previous windows error was not 0
@@ -11,4 +12,4 @@ extern bool output_previous_windows_error(const wchar_t* windowName = L"Previous
 	Creates a file selection box which blocks until user selects a file.
 	Returns L"" if no file selected
 */
-extern const TCHAR* get_user_file_selection(HWND owner = NULL);
+extern std::wstring get_user_file_selection(HWND owner = NULL);

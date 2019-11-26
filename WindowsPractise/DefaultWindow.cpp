@@ -20,7 +20,7 @@ LRESULT DefaultWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPARAM 
 		EndPaint(hwnd, &ps);
 	}
 	case WM_LBUTTONDOWN:
-		MessageBox(hwnd, get_user_file_selection(hwnd), L"Test", MB_OK);
+		MessageBox(hwnd, get_user_file_selection(hwnd).c_str(), L"Test", MB_OK);
 	}
 
 	//Carry out default action if no specific action is required
