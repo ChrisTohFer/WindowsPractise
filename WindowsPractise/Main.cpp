@@ -2,16 +2,23 @@
 #include <Windows.h>
 #include "Utils/Notifications.h"
 #include "DefaultWindow.h"
+#include "Utils/LifetimeObjects.h"
 
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 {
+	//Initialise COM library
+	COINITIALIZE_SINGLE_THREADED comLibraryInitialized;
+	if (!comLibraryInitialized)
+	{
+		OutputDebugStringW(L"Failed to initialize COM library");
+		return 1;
+	}
+
 	//Create a window wrapper object and then create/show the window
 	DefaultWindow example;
 	example.Create(L"WindowName");
 	ShowWindow(example.Window(), nCmdShow);
 
-	//Initialise COM library
-	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE); hr;
 
 	//Windows message loop (with error output)
 	output_previous_windows_error(L"Pre-Message Loop:");
@@ -24,8 +31,5 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 		output_previous_windows_error(L"Message Loop", false, false);
 	}
 
-	//
-	CoUninitialize();
-
-	output_previous_windows_error(L"Uninitializing Com Library");
+	return 0;
 }

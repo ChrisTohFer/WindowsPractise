@@ -1,8 +1,8 @@
 #include "Notifications.h"
 #include <Windows.h>
 #include <shobjidl.h>
-#include "PCOM.h"
-#include <atlbase.h>
+#include "PCOM.h"				//custom version of COM pointers
+//#include <atlbase.h>			//windows version of COM pointers
 
 bool output_previous_windows_error(const wchar_t* windowName, bool showIfNoError, bool show)
 {

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="LifetimeObjects.h" />
     <ClInclude Include="Notifications.h" />
     <ClInclude Include="PCOM.h" />
   </ItemGroup>

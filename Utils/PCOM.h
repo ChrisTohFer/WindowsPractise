@@ -21,8 +21,7 @@ public:
 	//Destruction
 	~PCOM()
 	{
-		if (ptr)
-			ptr->Release();
+		SafeRelease();
 	}
 	
 	//Assignment
@@ -56,6 +55,13 @@ public:
 	operator COM_TYPE** ()
 	{
 		return &ptr;
+	}
+
+	//Member functions
+	void SafeRelease()
+	{
+		if (ptr)
+			ptr->Release();
 	}
 
 private:
