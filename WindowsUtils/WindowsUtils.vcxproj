@@ -18,9 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="LifetimeObjects.h" />
+    <ClInclude Include="Notifications.h" />
+    <ClInclude Include="PCOM.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Notifications.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{778D9B9B-080B-4CF6-84B9-0643523B9AC6}</ProjectGuid>
+    <ProjectGuid>{312D193E-F50B-4A68-8ED8-675A25810EEF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Utils</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>

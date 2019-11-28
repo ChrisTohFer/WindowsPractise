@@ -56,12 +56,21 @@ public:
 	{
 		return &ptr;
 	}
+	operator COM_TYPE* ()
+	{
+		return ptr;
+	}
 
 	//Member functions
 	void SafeRelease()
 	{
 		if (ptr)
 			ptr->Release();
+		ptr = nullptr;
+	}
+	bool IsValid() const
+	{
+		return ptr;
 	}
 
 private:

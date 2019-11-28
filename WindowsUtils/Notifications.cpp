@@ -4,35 +4,6 @@
 #include "PCOM.h"				//custom version of COM pointers
 //#include <atlbase.h>			//windows version of COM pointers
 
-bool output_previous_windows_error(const wchar_t* windowName, bool showIfNoError, bool show)
-{
-	DWORD errorCode = GetLastError();
-
-	if (errorCode != 0)
-	{
-		//Error
-		wchar_t buffer[100];
-		if (show)
-		{
-			wsprintf(buffer, L"Error code: %lu", errorCode);
-			MessageBox(NULL, buffer, windowName, MB_OK);
-		}
-		else
-		{
-			wsprintf(buffer, L"%s:Error code: %lu", windowName, errorCode);
-			OutputDebugString(buffer);
-		}
-
-		return true;
-	}
-	else if (showIfNoError)
-	{
-		//No error but create window anyway
-		MessageBox(NULL, L"No error", windowName, MB_OK);
-	}
-
-	return false;
-}
 
 std::wstring get_user_file_selection(HWND owner)
 {

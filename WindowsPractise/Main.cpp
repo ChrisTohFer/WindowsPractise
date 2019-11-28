@@ -1,8 +1,8 @@
 
 #include <Windows.h>
-#include "Utils/Notifications.h"
+#include "WindowsUtils/Notifications.h"
 #include "DefaultWindow.h"
-#include "Utils/LifetimeObjects.h"
+#include "WindowsUtils/LifetimeObjects.h"
 
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 {
@@ -21,14 +21,13 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 
 
 	//Windows message loop (with error output)
-	output_previous_windows_error(L"Pre-Message Loop:");
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 
-		output_previous_windows_error(L"Message Loop", false, false);
+
 	}
 
 	return 0;

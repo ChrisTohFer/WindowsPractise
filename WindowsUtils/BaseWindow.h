@@ -94,7 +94,7 @@ protected:
 
 		RegisterClass(&wnd);
 		
-		return !output_previous_windows_error();
+		return GetLastError() == 0;
 	}
 
 	bool created = false;
