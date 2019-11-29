@@ -3,6 +3,7 @@
 #include "WindowsUtils/Notifications.h"
 #include "DefaultWindow.h"
 #include "WindowsUtils/LifetimeObjects.h"
+#include "WindowsUtils/DebugTools.h"
 
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 {
@@ -26,6 +27,8 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
+
+		OutputPreviousWindowsError(L"Windows error in main loop: ");
 	}
 
 	return 0;
