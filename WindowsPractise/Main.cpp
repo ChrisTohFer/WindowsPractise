@@ -26,8 +26,6 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
-
-
 	}
 
 	return 0;
