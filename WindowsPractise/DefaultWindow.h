@@ -3,7 +3,6 @@
 #include "WindowsUtils/BaseWindow.h"
 #include "WindowsUtils/PCOM.h"
 #include <d2d1.h>
-#pragma comment(lib, "d2d1")
 
 class DefaultWindow : public BaseWindow<DefaultWindow>
 {
