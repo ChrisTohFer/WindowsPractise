@@ -4,7 +4,7 @@
 #include <string>
 
 //Print out previous window error (if any) with a message
-void OutputPreviousWindowsError(const wchar_t* message = L"Previous Windows Error:")
+inline void OutputPreviousWindowsError(const wchar_t* message = L"Previous Windows Error:")
 {
 	DWORD lastError = GetLastError();
 	if (lastError != 0)
