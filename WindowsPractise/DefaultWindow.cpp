@@ -13,7 +13,7 @@ LRESULT DefaultWindow::HandleMessage(HWND hwnd, UINT msg, WPARAM wparam, LPARAM 
 		return 0;
 
 	case WM_CREATE:
-		if (FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, factory.operator ID2D1Factory **())))
+		if (FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, IID_ID2D1Factory, factory)))
 		{
 			return -1;
 		}
@@ -68,7 +68,6 @@ void DefaultWindow::HandleResize()
 		GetClientRect(window, &rec);
 
 		renderTarget->Resize(D2D1::SizeU(rec.right, rec.bottom));
-
 		CalculateLayout();
 		InvalidateRect(window, nullptr, false);
 	}

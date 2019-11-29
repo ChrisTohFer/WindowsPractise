@@ -26,14 +26,15 @@ public:
 			pState = (DERIVED_TYPE*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 		}
 
+		//If window is being destroyed then null the window pointer
+		if (msg == WM_NCDESTROY)
+		{
+			pState->window = nullptr;
+		}
+
 		//Handle the message
 		if (pState)
 		{
-			//
-			if (msg == WM_DESTROY)
-			{
-				pState->created = false;
-			}
 			return pState->HandleMessage(hwnd, msg, wparam, lparam);
 		}
 		else
@@ -47,7 +48,7 @@ public:
 	*/
 	virtual bool Create(const wchar_t* windowName)
 	{
-		if (!RegisterWindowClass() || created)
+		if (!RegisterWindowClass() || window)
 			return false;
 
 		window = CreateWindowEx(
@@ -64,8 +65,6 @@ public:
 			GetModuleHandle(NULL),
 			this
 		);
-
-		created = true;
 
 		return window != nullptr;
 	}
@@ -97,7 +96,6 @@ protected:
 		return GetLastError() == 0;
 	}
 
-	bool created = false;
 	HWND window = nullptr;
 
 private:
