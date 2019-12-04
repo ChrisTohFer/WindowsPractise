@@ -4,16 +4,8 @@
 #include "WindowsUtils/LifetimeObjects.h"
 #include "WindowsUtils/DebugTools.h"
 
-int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
+int WindowMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 {
-	//Initialise COM library
-	COINITIALIZE_OBJECT comLibraryInitialized(COINIT_APARTMENTTHREADED);
-	if (!comLibraryInitialized)
-	{
-		OutputDebugStringW(L"Failed to initialize COM library");
-		return 1;
-	}
-
 	//Create a window wrapper object and then create/show the window
 	DefaultWindow example;
 	example.Create(L"WindowName");
@@ -31,4 +23,20 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 	}
 
 	return 0;
+}
+
+
+int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, PWSTR cmdline, int nCmdShow)
+{
+	//Initialise COM library
+	COINITIALIZE_OBJECT comLibraryInitialized(COINIT_APARTMENTTHREADED);
+	if (!comLibraryInitialized)
+	{
+		OutputDebugStringW(L"Failed to initialize COM library");
+		return 1;
+	}
+
+	
+
+	return WindowMain(instance, prevInstance, cmdline, nCmdShow);
 }
