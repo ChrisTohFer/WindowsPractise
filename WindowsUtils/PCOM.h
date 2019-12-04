@@ -12,7 +12,7 @@ public:
 	//Construction
 	PCOM() {}
 	PCOM(const PCOM<COM_TYPE>& rhs)
-		:ptr(rhs)
+		:ptr(rhs.ptr)
 	{
 		if (ptr)
 			ptr->AddRef();
@@ -34,7 +34,7 @@ public:
 		if (ptr)
 			ptr->Release();
 
-		ptr = rhs;
+		ptr = rhs.ptr;
 		if (ptr)
 			ptr->AddRef();
 
@@ -77,3 +77,8 @@ private:
 	COM_TYPE* ptr = nullptr;
 };
 
+template<typename CLASS_TYPE, typename INTERFACE_TYPE>
+HRESULT CreateCOMObject(void** pcom)
+{
+	return CoCreateInstance(__uuidof(CLASS_TYPE), NULL, CLSCTX_ALL, __uuidof(INTERFACE_TYPE), pcom);
+}
