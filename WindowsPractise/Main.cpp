@@ -7,7 +7,7 @@
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int nCmdShow)
 {
 	//Initialise COM library
-	COINITIALIZE_SINGLE_THREADED comLibraryInitialized;
+	COINITIALIZE_OBJECT comLibraryInitialized(COINIT_APARTMENTTHREADED);
 	if (!comLibraryInitialized)
 	{
 		OutputDebugStringW(L"Failed to initialize COM library");
